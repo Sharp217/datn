@@ -1,0 +1,12 @@
+node_modules/
+.env
+.env.local
+.env.*.local
+*.key
+secrets/
+.DS_Store
+dist/
+build/
+.next/
+.vercel/
+*.log
