@@ -75,4 +75,104 @@ She sent a bear-waking-from-hibernation meme comparing him waking up from his na
 
 ---
 
-_Status as of 2026-03-24: Active, going well. Update this file as the story develops._
+---
+
+## 2026-03-24 Update — First Dinner Date
+
+**What happened:**
+- She went home after Pilates to get ready — made an effort for the date
+- Met for BBQ dinner, ~1.5 hours, closed the restaurant
+- Conversation flowed well with a few quiet moments
+- She shared family trauma + that she's on SSRIs (trust signal — opened up on date 1)
+- She said she "usually thinks the worst" — important context
+- Matt didn't go for a kiss (psyched himself out from the dance floor pullback)
+- Missed the "walk her to the car" moment — that's the natural kiss spot
+- She said the Radiate gap was because of birthday week chaos — not intentional ghosting
+- Friday eye contact at Sounders: she said she didn't remember seeing him, but body language suggested she did
+
+**After-date text sent:**
+"Hey thanks for coming tonight. You're still a vibe sober haha" + "You make it home?"
+
+**Her response:**
+Warm, reciprocated the check-in, referenced a specific dinner detail (potato salad) — she was present and paying attention
+
+**What she did that showed interest:**
+- Got ready after Pilates — made an effort
+- Stayed 1.5hrs until the place closed
+- Shared personal/vulnerable stuff (SSRIs, family)
+- Responded warmly after
+
+**Coaching notes:**
+- SSRIs + family trauma = may be slower to warm up, more guarded. Not a red flag, just context.
+- "Usually thinks the worst" = reassurance through action matters. Don't go silent.
+- The dance floor was a concert environment — dinner is different. Don't let one moment dictate everything.
+
+---
+
+## 2026-03-25 Update — Third Hangout Tonight
+
+**Texting during the day:**
+- She texted first: "hell yeah!" + "I hope you're having a good day" + mentioned being free after packing
+- He read the subtext correctly — she was hinting she'd be free tonight
+- He sent: "sooo you're free?" 
+- She replied: "Hahaha what's happening later?!?!" (3 exclamation points — excited)
+- He said: "me and you hanging out at your favorite spot for a drink"
+- She said yes
+
+**The invite move breakdown:**
+- Key lesson: when she dropped hints about being free, he read it correctly and made the move
+- "Sooo you're free?" — confident statement with a question mark, not a nervous ask
+- She handed him the ball twice, he took the shot the second time
+
+**Third hangout happening tonight (drinks)**
+
+**Current status as of 2026-03-25:**
+- Three hangouts in less than a week
+- She's clearly interested — initiating texts, making herself available
+- He hasn't kissed her since the dance floor (two opportunities missed)
+- Next kiss moment: tonight or the show in 2 weeks
+- Ticket reveal: still hasn't told her — saving for right moment
+- She's going to a festival this week (leaving tomorrow/Thursday)
+
+---
+
+## Dante's Updated Takeaways
+
+8. **Read subtext correctly** — "shouldn't take me too long to pack" = I'm free tonight. Don't wait for explicit invitation.
+9. **"Sooo you're free?"** > "are you free?" — confidence in phrasing matters
+10. **Walk her to the car** — that's the natural kiss moment. Don't miss it again.
+11. **She "usually thinks the worst"** — a simple reassuring text after a date goes a long way
+12. **Three hangouts in a week** = she's making time. That's investment.
+13. **Don't assume messages were sent** — always confirm before coaching the response *(meta note for Dante)*
+
+---
+
+## Dante AI Training Rules — Screenshot Analysis
+
+### Bubble Color / Position Rules (added 2026-03-30)
+
+**The core rule:** Always identify WHO sent each message before analyzing meaning.
+
+**iPhone:**
+- Blue bubble = the user (person sharing the screenshot / talking to Dante)
+- Grey/white bubble = the other person (the match/date)
+
+**Android:**
+- Bubble color varies by app and theme — NOT reliable
+- Right-side bubble = sender (user), Left-side bubble = other person
+
+**Universal fallback:** Bubble position (right vs left) is more reliable than color alone.
+
+**Apply this rule FIRST before any analysis.** Misattributing a message to the wrong person leads to bad coaching.
+
+### Clarification Rule (added 2026-03-30)
+If the intent or tone of a message is ambiguous — sarcasm vs sincerity, playful vs cold, empathetic vs mocking — Dante should ask the user "what vibe were you going for with that?" before analyzing or coaching the response. Never build advice on an assumed tone.
+
+### Known Error — 2026-03-30
+In a screenshot review session, Dante (Neo) incorrectly attributed a message Matt sent *about kandi* to Nina, when it was actually Matt's bubble. Correct application of the blue/right-side rule would have caught this.
+
+**Lesson:** Never assume message sender based on content alone. Always check bubble side/color first.
+
+---
+
+_Status as of 2026-03-25: Three hangouts in one week. She's interested. Kiss hasn't happened since the dance floor. Next opportunity: tonight or the show in 2 weeks._

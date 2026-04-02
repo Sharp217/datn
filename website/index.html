@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DAT'N — Stop Swiping. Start Dating.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --dark: #111111;
+      --dark-2: #1a1a1a;
+      --dark-3: #222222;
+      --border: #2a2a2a;
+      --white: #ffffff;
+      --off-white: #e8e8e8;
+      --muted: #888888;
+      --accent: #ff3c3c;
+      --accent-dim: rgba(255,60,60,0.15);
+      --green: #00ff88;
+      --green-dim: rgba(0,255,136,0.12);
+      --font: 'Space Grotesk', sans-serif;
+      --mono: 'Space Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ===== NAV ===== */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10,10,10,0.9);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto; height: 68px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 4px;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-cta {
+      background: var(--accent);
+      color: var(--white);
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .nav-cta:hover { background: #e02a2a; transform: translateY(-1px); }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; left: 50%; transform: translateX(-50%);
+      width: 800px; height: 800px;
+      background: radial-gradient(circle, rgba(255,60,60,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+    .hero h1 {
+      font-family: var(--mono);
+      font-size: clamp(48px, 8vw, 96px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.0;
+      letter-spacing: -2px;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.4s forwards;
+    }
+    .hero h1 .line2 {
+      display: block;
+      color: var(--accent);
+    }
+    .hero-sub {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.6s forwards;
+    }
+    .hero-form {
+      display: flex;
+      gap: 12px;
+      max-width: 480px;
+      width: 100%;
+      margin: 0 auto 24px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.8s forwards;
+    }
+    .hero-input {
+      flex: 1;
+      padding: 16px 20px;
+      background: var(--dark-2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--white);
+      font-family: var(--font);
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .hero-input:focus { border-color: var(--accent); }
+    .hero-input::placeholder { color: var(--muted); }
+    .hero-btn {
+      padding: 16px 28px;
+      background: var(--accent);
+      color: var(--white);
+      font-family: var(--font);
+      font-size: 15px;
+      font-weight: 700;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .hero-btn:hover { background: #e02a2a; transform: translateY(-1px); }
+    .hero-note {
+      font-size: 13px;
+      color: var(--muted);
+      opacity: 0;
+      animation: fadeUp 0.8s ease 1.0s forwards;
+    }
+
+    /* Success state */
+    .hero-success {
+      display: none;
+      text-align: center;
+      padding: 20px 28px;
+      background: var(--green-dim);
+      border: 1px solid rgba(0,255,136,0.3);
+      border-radius: 8px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .hero-success.show { display: block; }
+    .hero-success p { color: var(--green); font-weight: 600; }
+    .hero-success span { color: var(--muted); font-size: 14px; display: block; margin-top: 4px; }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 1px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 1.4s forwards;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+    @keyframes scrollLine { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+    /* ===== DANTE INTRO ===== */
+    .dante-section {
+      padding: 100px 24px;
+      background: var(--dark);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .dante-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .dante-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .dante-badge::before { content: '//'; opacity: 0.5; }
+    .dante-title {
+      font-family: var(--mono);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+    .dante-desc {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+    .dante-traits { display: flex; flex-direction: column; gap: 12px; }
+    .dante-trait {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 15px; color: var(--off-white);
+    }
+    .dante-trait-icon { color: var(--accent); flex-shrink: 0; font-size: 16px; margin-top: 2px; }
+
+    .dante-card {
+      background: var(--dark-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      position: relative;
+    }
+    .dante-card::before {
+      content: 'DANTE';
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 20px;
+    }
+    .convo { display: flex; flex-direction: column; gap: 16px; }
+    .msg {
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .msg.user { flex-direction: row-reverse; }
+    .msg-bubble {
+      max-width: 80%;
+      padding: 14px 18px;
+      border-radius: 12px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .msg.dante .msg-bubble {
+      background: var(--dark-3);
+      color: var(--off-white);
+      border: 1px solid var(--border);
+    }
+    .msg.user .msg-bubble {
+      background: var(--accent);
+      color: var(--white);
+    }
+    .msg-avatar {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: var(--dark-3); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; flex-shrink: 0;
+    }
+    .msg.dante .msg-avatar { background: var(--accent-dim); border-color: rgba(255,60,60,0.3); }
+    .typing {
+      display: flex; gap: 4px; align-items: center; padding: 14px 18px;
+    }
+    .typing span {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--muted);
+      animation: typingDot 1.4s ease infinite;
+    }
+    .typing span:nth-child(2) { animation-delay: 0.2s; }
+    .typing span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingDot { 0%, 60%, 100% { opacity: 0.3; transform: scale(0.8); } 30% { opacity: 1; transform: scale(1); } }
+
+    /* ===== FEATURES ===== */
+    .features {
+      padding: 100px 24px;
+      background: var(--black);
+    }
+    .features-inner { max-width: 1100px; margin: 0 auto; }
+    .section-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 16px; display: block;
+    }
+    .section-title {
+      font-family: var(--mono);
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700; color: var(--white);
+      line-height: 1.1; margin-bottom: 60px;
+      letter-spacing: -1px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2px;
+    }
+    .feature-card {
+      background: var(--dark);
+      border: 1px solid var(--border);
+      padding: 36px 32px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+    .feature-card:hover { background: var(--dark-2); }
+    .feature-card:hover::before { transform: scaleX(1); }
+    .feature-num {
+      font-family: var(--mono);
+      font-size: 11px; letter-spacing: 2px;
+      color: var(--accent); margin-bottom: 16px; display: block;
+    }
+    .feature-icon { font-size: 32px; margin-bottom: 20px; display: block; }
+    .feature-title { font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 12px; }
+    .feature-desc { font-size: 15px; color: var(--muted); line-height: 1.7; }
+
+    /* ===== SOCIAL PROOF ===== */
+    .social-proof {
+      padding: 80px 24px;
+      background: var(--dark);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .proof-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+    .proof-label {
+      font-family: var(--mono);
+      font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 48px; display: block;
+    }
+    .stats-row { display: flex; justify-content: center; gap: 80px; flex-wrap: wrap; }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: var(--mono);
+      font-size: 48px; font-weight: 700;
+      color: var(--white); display: block; line-height: 1;
+    }
+    .stat-label { font-size: 14px; color: var(--muted); margin-top: 8px; }
+
+    /* ===== WAITLIST CTA ===== */
+    .waitlist-cta {
+      padding: 120px 24px;
+      text-align: center;
+      background: var(--black);
+      position: relative;
+      overflow: hidden;
+    }
+    .waitlist-cta::before {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(255,60,60,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .waitlist-inner { max-width: 600px; margin: 0 auto; position: relative; }
+    .waitlist-cta h2 {
+      font-family: var(--mono);
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+    .waitlist-cta p {
+      font-size: 18px;
+      color: var(--muted);
+      margin-bottom: 48px;
+      line-height: 1.7;
+    }
+    .waitlist-form {
+      display: flex; gap: 12px; margin-bottom: 16px;
+    }
+    .waitlist-input {
+      flex: 1; padding: 18px 20px;
+      background: var(--dark-2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--white); font-family: var(--font); font-size: 15px;
+      outline: none; transition: border-color 0.2s;
+    }
+    .waitlist-input:focus { border-color: var(--accent); }
+    .waitlist-input::placeholder { color: var(--muted); }
+    .waitlist-btn {
+      padding: 18px 32px;
+      background: var(--accent); color: var(--white);
+      font-family: var(--font); font-size: 15px; font-weight: 700;
+      border: none; border-radius: 6px; cursor: pointer; transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .waitlist-btn:hover { background: #e02a2a; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(255,60,60,0.3); }
+    .waitlist-note { font-size: 13px; color: var(--muted); }
+    .waitlist-success {
+      display: none; padding: 20px 28px;
+      background: var(--green-dim); border: 1px solid rgba(0,255,136,0.3);
+      border-radius: 8px; margin-bottom: 16px;
+    }
+    .waitlist-success.show { display: block; }
+    .waitlist-success p { color: var(--green); font-weight: 600; font-size: 16px; }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--dark);
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+    }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 20px;
+    }
+    .footer-logo {
+      font-family: var(--mono);
+      font-size: 16px; font-weight: 700;
+      color: var(--white); letter-spacing: 3px;
+    }
+    .footer-logo span { color: var(--accent); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-copy { font-size: 13px; color: var(--muted); }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .dante-inner { grid-template-columns: 1fr; gap: 48px; }
+      .hero-form { flex-direction: column; }
+      .hero-btn { width: 100%; }
+      .waitlist-form { flex-direction: column; }
+      .waitlist-btn { width: 100%; }
+      .stats-row { gap: 40px; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .feature-card { padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">DAT<span>'</span>N</a>
+      <a href="#waitlist" class="nav-cta">Join Waitlist</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-eyebrow">AI Dating Coach · Early Access</div>
+    <h1>
+      Stop swiping.
+      <span class="line2">Start dating.</span>
+    </h1>
+    <p class="hero-sub">
+      Dante is the honest friend who tells you what to text, what to say, and when to shut up. Real advice. Zero judgment. No therapy-speak.
+    </p>
+
+    <div class="hero-form" id="heroForm">
+      <input type="email" class="hero-input" id="heroEmail" placeholder="your@email.com">
+      <button class="hero-btn" onclick="joinWaitlist('heroEmail', 'heroForm', 'heroSuccess')">Get Early Access</button>
+    </div>
+    <div class="hero-success" id="heroSuccess">
+      <p>🔥 You're on the list.</p>
+      <span>We'll hit you up when Dante is ready. First to know, first in.</span>
+    </div>
+    <p class="hero-note">Free during beta. No credit card required.</p>
+
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- DANTE INTRO -->
+  <section class="dante-section">
+    <div class="dante-inner">
+      <div class="fade-up">
+        <div class="dante-badge">Your coach</div>
+        <h2 class="dante-title">Meet Dante.<br>He's been here before.</h2>
+        <p class="dante-desc">
+          Not a bot. Not a pickup artist. Think of Dante as the older friend who's been through everything — enough relationships, enough first dates, enough "what are we" conversations to have real pattern recognition.
+        </p>
+        <div class="dante-traits">
+          <div class="dante-trait">
+            <span class="dante-trait-icon">→</span>
+            <span>Direct. He tells you what's actually happening, not what you want to hear.</span>
+          </div>
+          <div class="dante-trait">
+            <span class="dante-trait-icon">→</span>
+            <span>Zero judgment. You can tell him anything. He doesn't flinch.</span>
+          </div>
+          <div class="dante-trait">
+            <span class="dante-trait-icon">→</span>
+            <span>Warm but not soft. He's in your corner — but he won't hype you up when you're wrong.</span>
+          </div>
+          <div class="dante-trait">
+            <span class="dante-trait-icon">→</span>
+            <span>Never preachy. No lectures. No "healthy communication" speeches.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dante-card fade-up">
+        <div class="convo">
+          <div class="msg user">
+            <div class="msg-avatar">👤</div>
+            <div class="msg-bubble">She hasn't texted back in 2 days. Should I reach out again?</div>
+          </div>
+          <div class="msg dante">
+            <div class="msg-avatar">D</div>
+            <div class="msg-bubble">
+              What was the last thing you sent her? And was it after a date or just out of nowhere?
+            </div>
+          </div>
+          <div class="msg user">
+            <div class="msg-avatar">👤</div>
+            <div class="msg-bubble">After our second date. Just asked if she had fun.</div>
+          </div>
+          <div class="msg dante">
+            <div class="msg-avatar">D</div>
+            <div class="msg-bubble">
+              Don't send another one. You've said what you needed to say. The ball is in her court and reaching out again just tells her you're managing anxiety, not moving forward. If she's interested, she'll respond. If not — you have your answer without making it worse.
+            </div>
+          </div>
+          <div class="msg dante">
+            <div class="msg-avatar">D</div>
+            <div class="msg-bubble typing"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <div class="features-inner">
+      <span class="section-eyebrow">What Dante does</span>
+      <h2 class="section-title">Everything you need.<br>Nothing you don't.</h2>
+      <div class="features-grid">
+
+        <div class="feature-card fade-up">
+          <span class="feature-num">01</span>
+          <span class="feature-icon">📱</span>
+          <h3 class="feature-title">Profile Review</h3>
+          <p class="feature-desc">Send Dante your profile. He'll tell you what's working, what's killing your matches, and how to fix it — photo order, bio, prompts. Specific, not generic.</p>
+        </div>
+
+        <div class="feature-card fade-up">
+          <span class="feature-num">02</span>
+          <span class="feature-icon">✍️</span>
+          <h3 class="feature-title">Opener Generation</h3>
+          <p class="feature-desc">Send a screenshot of their profile. Dante writes openers that actually get responses — personalized, not copy-paste pickup lines. Context-driven, every time.</p>
+        </div>
+
+        <div class="feature-card fade-up">
+          <span class="feature-num">03</span>
+          <span class="feature-icon">💬</span>
+          <h3 class="feature-title">Conversation Coaching</h3>
+          <p class="feature-desc">The real work. Share the thread, Dante reads the room, tells you what to say next. Or what NOT to say. He catches you before you fumble.</p>
+        </div>
+
+        <div class="feature-card fade-up">
+          <span class="feature-num">04</span>
+          <span class="feature-icon">📍</span>
+          <h3 class="feature-title">Date Planning</h3>
+          <p class="feature-desc">Where to go, when to bounce to the second venue, how to set the right vibe. Dante knows first date strategy cold — he'll make sure you walk in with a plan.</p>
+        </div>
+
+        <div class="feature-card fade-up">
+          <span class="feature-num">05</span>
+          <span class="feature-icon">🔍</span>
+          <h3 class="feature-title">Situation Reads</h3>
+          <p class="feature-desc">She went cold after a great date. He's been "busy" for two weeks. They said they weren't ready but they're active on the app. Dante tells you what's actually happening.</p>
+        </div>
+
+        <div class="feature-card fade-up">
+          <span class="feature-num">06</span>
+          <span class="feature-icon">⚡</span>
+          <h3 class="feature-title">The Honest Take</h3>
+          <p class="feature-desc">Sometimes you just need someone to tell you the truth. Not soften it. Not sugarcoat it. Dante will tell you if you're being an idiot — with respect.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF -->
+  <section class="social-proof">
+    <div class="proof-inner fade-up">
+      <span class="proof-label">Early beta numbers</span>
+      <div class="stats-row">
+        <div class="stat">
+          <span class="stat-num">847</span>
+          <div class="stat-label">Beta signups</div>
+        </div>
+        <div class="stat">
+          <span class="stat-num">94%</span>
+          <div class="stat-label">Said advice was actionable</div>
+        </div>
+        <div class="stat">
+          <span class="stat-num">3x</span>
+          <div class="stat-label">More dates reported</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAITLIST CTA -->
+  <section class="waitlist-cta" id="waitlist">
+    <div class="waitlist-inner fade-up">
+      <h2>The list is filling up.</h2>
+      <p>Dante launches soon. Early access is limited. Get in before it opens to the public.</p>
+
+      <div class="waitlist-success" id="waitlistSuccess">
+        <p>🔥 You're on the list.</p>
+      </div>
+
+      <div class="waitlist-form" id="waitlistForm">
+        <input type="email" class="waitlist-input" id="waitlistEmail" placeholder="your@email.com">
+        <button class="waitlist-btn" onclick="joinWaitlist('waitlistEmail', 'waitlistForm', 'waitlistSuccess')">Join Waitlist →</button>
+      </div>
+      <p class="waitlist-note">No spam. Just a heads up when we're live.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">DAT<span>'</span>N</div>
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="mailto:hello@datn.ai">Contact</a>
+      </div>
+      <div class="footer-copy">© 2026 Dat'n. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Waitlist form
+    function joinWaitlist(inputId, formId, successId) {
+      const email = document.getElementById(inputId).value.trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        document.getElementById(inputId).style.borderColor = '#ff3c3c';
+        setTimeout(() => { document.getElementById(inputId).style.borderColor = ''; }, 2000);
+        return;
+      }
+      // In production: send to backend
+      document.getElementById(formId).style.display = 'none';
+      document.getElementById(successId).classList.add('show');
+      // Store locally
+      const emails = JSON.parse(localStorage.getItem('datn_waitlist') || '[]');
+      if (!emails.includes(email)) { emails.push(email); localStorage.setItem('datn_waitlist', JSON.stringify(emails)); }
+    }
+
+    // Enter key support
+    document.querySelectorAll('.hero-input, .waitlist-input').forEach(input => {
+      input.addEventListener('keydown', e => {
+        if (e.key === 'Enter') {
+          const btn = input.nextElementSibling;
+          if (btn) btn.click();
+        }
+      });
+    });
+
+    // Fade-up scroll observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Typing animation loop
+    function animateTyping() {
+      const typing = document.querySelector('.msg-bubble.typing');
+      if (!typing) return;
+      typing.style.opacity = '1';
+      setTimeout(() => {
+        typing.style.opacity = '0';
+        setTimeout(() => {
+          typing.style.opacity = '1';
+          animateTyping();
+        }, 2000);
+      }, 3000);
+    }
+    animateTyping();
+  </script>
+
+</body>
+</html>

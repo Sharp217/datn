@@ -95,7 +95,7 @@ Dante is your personal dating concierge. He's seen everything, judges nothing, a
 - [x] Register datn.ai domain ✅
 - [ ] Set up Cloudflare DNS + email forwarding (hello@datn.ai, dante@datn.ai)
 - [ ] Register DBA under Matter Media LLC
-- [ ] Create OpenRouter account for LLM routing
+- [x] OpenRouter DELETED Apr 1 — use Anthropic OAuth instead
 - [ ] Set up GitHub repo
 - [ ] Define Dante's personality/voice doc
 
@@ -112,7 +112,13 @@ Dante is your personal dating concierge. He's seen everything, judges nothing, a
 - [ ] User accounts + profile storage
 - [ ] Conversation coaching feature (screenshot → Dante suggests reply)
 - [ ] Real-time chat interface with Dante
-- [ ] OpenRouter multi-model routing (fast model for quick replies, smart model for strategy)
+- [ ] LLM routing strategy — OpenRouter DELETED, use Anthropic OAuth or direct provider APIs
+- [ ] **Dante Intelligence System** (see `dante-intelligence-spec.md`)
+  - [ ] Style capture onboarding (screenshot analysis → user voice profile)
+  - [ ] Behavioral coaching layer (detect double texting, neediness, wrong moves)
+  - [ ] Dynamic system prompt built from user's style profile
+  - [ ] 3-option reply format (refined / bolder / softer)
+  - [ ] Feedback loop — learns from edits and rejections over time
 
 ### 🔵 Native App (Months 3-6)
 - [ ] React Native or Flutter app
@@ -135,7 +141,13 @@ Dante is your personal dating concierge. He's seen everything, judges nothing, a
 
 **Strategy:** Web-based subscription to avoid 30% App Store cut. App is free to download, upsells to datn.ai checkout.
 
-- **Free tier** — limited Dante interactions (3 openers/day, 1 profile review)
+- **Free tier** — hard limits to control API costs:
+  - 10 messages/day with Dante (resets midnight)
+  - 1 profile review (one-time only)
+  - 3 opener suggestions per match
+  - No conversation coaching (Pro only)
+  - No date planning (Pro only)
+  - Upgrade prompt triggers at limit: "Dante has more to say."
 - **Dat'n Pro — $19/mo** — unlimited openers, conversation coaching, date planning
 - **Dat'n Elite — $29/mo** — everything + priority Dante, voice mode, advanced profile analytics
 - **One-time packages** — "Profile Makeover" $49, "First Week Coaching" $29
@@ -143,7 +155,7 @@ Dante is your personal dating concierge. He's seen everything, judges nothing, a
 ---
 
 ## Tech Stack
-- **LLM routing:** OpenRouter (model-agnostic, fallbacks built in)
+- **LLM routing:** Anthropic OAuth (OpenRouter DELETED Apr 1)
 - **Auth + DB:** Supabase
 - **Payments:** Stripe (web checkout)
 - **Mobile:** React Native or Flutter (Phase 2)
